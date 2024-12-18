@@ -8,7 +8,6 @@ export async function GET(req: Request) {
   if (!userId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
-
   await connectDB()
   const todos = await Todo.find({ userId })
   return NextResponse.json(todos)
