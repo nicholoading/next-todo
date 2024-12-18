@@ -1,9 +1,9 @@
-import { NextResponse, NextRequest } from 'next/server'
+import { NextResponse } from 'next/server'
 import { getAuth } from "@clerk/nextjs/server"
 import { connectDB } from "./mongoose"
 import { Todo } from "./todoModel"
 
-export async function GET(req: NextRequest) {
+export async function GET(req: Request) {
   const { userId } = getAuth(req)
   if (!userId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
   return NextResponse.json(todos)
 }
 
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
   const { userId } = getAuth(req)
   if (!userId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
   return NextResponse.json(newTodo, { status: 201 })
 }
 
-export async function PUT(req: NextRequest) {
+export async function PUT(req: Request) {
   const { userId } = getAuth(req)
   if (!userId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -54,7 +54,7 @@ export async function PUT(req: NextRequest) {
   return NextResponse.json(updatedTodo)
 }
 
-export async function DELETE(req: NextRequest) {
+export async function DELETE(req: Request) {
   const { userId } = getAuth(req)
   if (!userId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
